@@ -1,4 +1,4 @@
-import { type ChatInputCommandInteraction, GuildScheduledEventManager } from "discord.js";
+import type { ChatInputCommandInteraction } from "discord.js";
 
 export type CommandCollection = Record<
 	string,
