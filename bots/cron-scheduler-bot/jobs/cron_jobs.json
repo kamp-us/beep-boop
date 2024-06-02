@@ -1,0 +1,16 @@
+[
+  {
+    "schedule": "* * * * *",
+    "function": "sendNotification",
+    "params": {
+      "channelId": "your-channel-id"
+    }
+  },
+  {
+    "schedule": "0 */2 * * *",
+    "function": "anotherScheduledFunction",
+    "params": {
+      "someParam": "someValue"
+    }
+  }
+]
