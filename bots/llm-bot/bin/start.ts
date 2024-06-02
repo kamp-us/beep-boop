@@ -1,8 +1,12 @@
 import Debug from "debug";
 import { Client, Events, GatewayIntentBits } from "discord.js";
-import { type CommandCollection, commands } from "../commands";
+import { commands } from "../commands";
+import { TextDecoderStream, TextEncoderStream } from "../polyfill";
 
-const debug = Debug("stage-manager:start");
+globalThis.TextEncoderStream = TextEncoderStream;
+globalThis.TextDecoderStream = TextDecoderStream;
+
+const debug = Debug("llm-bot:start");
 debug.enabled = true;
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -14,19 +18,21 @@ client.once(Events.ClientReady, (c) => {
 client.on(Events.InteractionCreate, async (interaction) => {
 	if (!interaction.isChatInputCommand()) return;
 
-	debug(`Received command: ${interaction.commandName} from user: ${interaction.user.username}`);
+	const name = interaction.commandName;
 
-	const command = (commands as CommandCollection)[interaction.commandName];
+	debug(`Received command: ${name} from user: ${interaction.user.username}`);
+
+	const command = commands[name];
 	if (!command) {
-		debug(`Command not found: ${interaction.commandName}`);
+		debug(`Command not found: ${name}`);
 		return;
 	}
 
 	try {
-		debug(`Executing command: ${interaction.commandName}`);
+		debug(`Executing command: ${name}`);
 		await command.handler(interaction);
 	} catch (error) {
-		debug(`Error while executing command: ${interaction.commandName}`);
+		debug(`Error while executing command: ${name}`);
 		if (interaction.deferred || interaction.replied) {
 			await interaction.followUp({
 				content: "There was an error while executing this command!",

@@ -1,22 +1,24 @@
 {
-	"name": "@kampus/llm-bot",
-	"module": "index.ts",
-	"type": "module",
-	"scripts": {
-		"deploy": "bun ./bin/deploy.ts",
-		"start": "bun ./bin/start.ts"
-	},
-	"devDependencies": {
-		"@types/bun": "latest",
-		"@types/debug": "^4.1.12"
-	},
-	"peerDependencies": {
-		"typescript": "^5.0.0"
-	},
-	"dependencies": {
-		"debug": "^4.3.4",
-		"discord.js": "^14.15.2",
-		"znv": "^0.4.0",
-		"zod": "^3.23.8"
-	}
+  "name": "@kampus/llm-bot",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "deploy": "bun ./bin/deploy.ts",
+    "start": "bun ./bin/start.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/debug": "^4.1.12"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^0.0.18",
+    "ai": "^3.1.22",
+    "debug": "^4.3.4",
+    "discord.js": "^14.15.2",
+    "znv": "^0.4.0",
+    "zod": "^3.23.8"
+  }
 }
